@@ -207,10 +207,10 @@ static void _step_currents(void) {
 										sinf(asw.out.magnetic_angle - 4.0 * PI / 3.0) * asw.out.ic);
 
 	/* Filter I_d and I_q. */
-	if (asw.out.iabc < 10 && asw.out.iabc > -10) {
+	//if (asw.out.iabc < 10 && asw.out.iabc > -10) {
 		if (asw.out.id_raw == asw.out.id_raw) asw.out.id_filtered = asw.out.id_filtered * _IQD_LPF_ALPHA + asw.out.id_raw * (1 - _IQD_LPF_ALPHA);
 		if (asw.out.iq_raw == asw.out.iq_raw) asw.out.iq_filtered = asw.out.iq_filtered * _IQD_LPF_ALPHA + asw.out.iq_raw * (1 - _IQD_LPF_ALPHA);
-	}
+	//}
 }
 
 static void _step_gate_driver(void) {
@@ -327,7 +327,7 @@ int32_t asw_init(void) {
 	_d_pid_controller.ki = 1;
 	_d_pid_controller.kd = 0;
 	_d_pid_controller.sampling_time = _SAMPLING_TIME;
-	_d_pid_controller.limit = 0.2;
+	_d_pid_controller.limit = 0.5;
 	_d_pid_controller.rate = 10;
 
 	pid_controller_init(&_q_pid_controller);
@@ -335,7 +335,7 @@ int32_t asw_init(void) {
 	_q_pid_controller.ki = 1;
 	_q_pid_controller.kd = 0;
 	_q_pid_controller.sampling_time = _SAMPLING_TIME;
-	_q_pid_controller.limit = 0.2;
+	_q_pid_controller.limit = 0.5;
 	_q_pid_controller.rate = 10;
 
 	return 0;
