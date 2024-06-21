@@ -1,0 +1,557 @@
+//******************************BUSMASTER Messages and signals Database ******************************//
+
+[DATABASE_VERSION] 1.3
+
+[PROTOCOL] CAN
+
+[BUSMASTER_VERSION] [3.2.2]
+[NUMBER_OF_MESSAGES] 14
+
+[START_MSG] TB_Request,2000,2,1,1,S,TB
+[START_SIGNALS] TB_Request_Speed,16,1,0,I,32767,-32768,1,0,1,rpm,,MDU
+[END_MSG]
+
+[START_MSG] BMS_Pack_CV_Info,338,8,6,0,S,BMS
+[START_SIGNALS] DASH_CRC_152,5,8,0,U,31,0,0,0,1,,,VCU
+[START_SIGNALS] DASH_Alive_Counter_152,3,8,5,U,6,0,0,0,1,,,VCU
+[START_SIGNALS] BMS_Regeneration_Allowed,1,4,0,B,1,0,0,0,1,,,VCU
+[VALUE_DESCRIPTION] "Inactive",0
+[VALUE_DESCRIPTION] "Active",1
+[START_SIGNALS] BMS_Status_FET,1,4,1,B,1,0,0,0,1,,,MDU,VCU
+[VALUE_DESCRIPTION] "Inactive",0
+[VALUE_DESCRIPTION] "Active",1
+[START_SIGNALS] BMS_Voltage_Pack,13,4,3,U,8187,0,0,0,0.075,V,,MDU,VCU
+[START_SIGNALS] BMS_Current_Pack,16,2,0,I,5000,-5000,0,0,0.2,A,,VCU
+[END_MSG]
+
+[START_MSG] DASH_Bike_Info,1370,8,1,0,S,DASH
+[START_SIGNALS] DASH_Odo_Meter_Extended,24,3,0,U,9999990,0,0,0,0.1,km,,BMS,MDU,VCU
+[END_MSG]
+
+[START_MSG] MDU_Debug_1,1844,8,4,0,S,MDU
+[START_SIGNALS] MDU_Received_Torq_Req,16,8,0,I,20000,-20000,0,0,0.05,Nm,,
+[START_SIGNALS] MDU_Phase_B_volt,16,6,0,I,32750,-32750,0,0,0.02,V,,
+[START_SIGNALS] MDU_Phase_A_volt,16,4,0,I,32750,-32750,0,0,0.02,V,,
+[START_SIGNALS] MDU_Limited_Torq_Req,16,2,0,I,20000,-20000,0,0,0.05,Nm,,
+[END_MSG]
+
+[START_MSG] MDU_Debug_2,1845,8,4,0,S,MDU
+[START_SIGNALS] MDU_Phase_C_volt,16,8,0,I,32750,-32750,0,0,0.02,V,,
+[START_SIGNALS] MDU_Phase_C_amps,16,6,0,I,25000,-25000,0,0,0.01,A,,
+[START_SIGNALS] MDU_Phase_B_amps,16,4,0,I,25000,-25000,0,0,0.01,A,,
+[START_SIGNALS] MDU_Phase_A_amps,16,2,0,I,25000,-25000,0,0,0.01,A,,
+[END_MSG]
+
+[START_MSG] MDU_Debug_3,1846,8,5,0,S,MDU
+[START_SIGNALS] MDU_Iq_request,16,8,0,I,25000,-25000,0,0,0.01,A,,
+[START_SIGNALS] MDU_Iq_measured,16,6,0,I,25000,-25000,0,0,0.01,A,,
+[START_SIGNALS] MDU_DC_Bus_amps_calc,16,4,0,I,25000,-25000,0,0,0.01,A,,
+[START_SIGNALS] MDU_DC_Bus_volt,15,2,0,U,32750,0,0,0,0.02,V,,
+[START_SIGNALS] MDU_gate_ready,1,1,7,B,1,0,0,0,1,,,
+[VALUE_DESCRIPTION] "Inverter drivers not ready",0
+[VALUE_DESCRIPTION] "Inverter drivers ready",1
+[END_MSG]
+
+[START_MSG] MDU_Debug_4,1847,8,4,0,S,MDU
+[START_SIGNALS] MDU_uq_request,16,8,0,I,32750,-32750,0,0,0.02,V,,
+[START_SIGNALS] MDU_uq_measured,16,6,0,I,32750,-32750,0,0,0.02,V,,
+[START_SIGNALS] MDU_Id_request,16,4,0,I,25000,-25000,0,0,0.01,A,,
+[START_SIGNALS] MDU_Id_measured,16,2,0,I,25000,-25000,0,0,0.01,A,,
+[END_MSG]
+
+[START_MSG] MDU_Debug_5,1848,8,5,0,S,MDU
+[START_SIGNALS] MDU_ud_request,16,8,0,I,32750,-32750,0,0,0.02,V,,
+[START_SIGNALS] MDU_ud_measured,16,6,0,I,32750,-32750,0,0,0.02,V,,
+[START_SIGNALS] MDU_u_mod,16,4,0,I,32750,-32750,0,0,0.02,V,,
+[START_SIGNALS] MDU_power_calc,15,2,0,I,10000,-11000,0,0,0.01,kW,,
+[START_SIGNALS] MDU_gate_fault,1,1,7,B,1,0,0,0,1,,,
+[VALUE_DESCRIPTION] "No inverter drivers faults",0
+[VALUE_DESCRIPTION] "Inverter drivers fault",1
+[END_MSG]
+
+[START_MSG] MDU_Speed_Torque_Info,282,8,7,0,S,MDU
+[START_SIGNALS] MDU_CRC_11A,5,8,0,U,31,0,0,0,1,,,VCU
+[START_SIGNALS] MDU_Alive_Counter_11A,3,8,5,U,6,0,0,0,1,,,VCU
+[START_SIGNALS] MDU_Eng_Actual_Torque,16,7,0,I,5000,-5000,0,0,0.2,Nm,,VCU
+[START_SIGNALS] MDU_Engine_Rpm_Validity,1,5,6,B,1,0,0,0,1,,,VCU
+[VALUE_DESCRIPTION] "Normal",0
+[VALUE_DESCRIPTION] "Failure",1
+[START_SIGNALS] MDU_Eng_Act_Trq_Validity,1,5,7,B,1,0,0,0,1,,,VCU
+[VALUE_DESCRIPTION] "Normal",0
+[VALUE_DESCRIPTION] "Failure",1
+[START_SIGNALS] MDU_Eng_Act_RPM_Gradient,16,4,0,I,32767,-32768,0,0,10,rpm/s,,VCU
+[START_SIGNALS] MDU_Engine_Rpm,16,2,0,I,20000,-20000,0,0,1,rpm,,VCU
+[END_MSG]
+
+[START_MSG] MDU_Status_Info_1,283,8,4,0,S,MDU
+[START_SIGNALS] MDU_Min_Torque_Derating,12,6,0,I,2040,-2040,0,0,0.1,Nm,,VCU
+[START_SIGNALS] MDU_Max_Torque_Derating,12,5,4,I,2040,-2040,0,0,0.1,Nm,,VCU
+[START_SIGNALS] MDU_Min_Torque_Avl,12,3,0,I,2040,-2040,0,0,0.1,Nm,,VCU
+[START_SIGNALS] MDU_Max_Torque_Avl,12,2,4,I,2040,-2040,0,0,0.1,Nm,,VCU
+[END_MSG]
+
+[START_MSG] MDU_Status_Info_2,608,8,13,0,S,MDU
+[START_SIGNALS] MDU_CRC_260,5,8,0,U,31,0,0,0,1,,,VCU
+[START_SIGNALS] MDU_Alive_Counter_260,3,8,5,U,6,0,0,0,1,,,VCU
+[START_SIGNALS] MDU_Engine_Direction_Resp,2,4,0,U,3,0,0,0,1,,,VCU
+[VALUE_DESCRIPTION] "None",0
+[VALUE_DESCRIPTION] "Clockwise",1
+[VALUE_DESCRIPTION] "Counter Clockwise",2
+[VALUE_DESCRIPTION] "Reserved",3
+[START_SIGNALS] MDU_State,3,4,5,U,7,0,0,0,1,,,VCU
+[VALUE_DESCRIPTION] "Off",0
+[VALUE_DESCRIPTION] "Init",1
+[VALUE_DESCRIPTION] "Standby",2
+[VALUE_DESCRIPTION] "Drive",3
+[VALUE_DESCRIPTION] "Prog",4
+[VALUE_DESCRIPTION] "Fault",5
+[VALUE_DESCRIPTION] "Reserved",6
+[VALUE_DESCRIPTION] "Reserved",7
+[START_SIGNALS] MDU_Temp,8,3,0,I,126,-128,0,34,0.5,°C,,VCU
+[START_SIGNALS] MDU_Malfunction_Indica_LED,1,2,0,B,1,0,0,0,1,,,VCU
+[VALUE_DESCRIPTION] "Off",0
+[VALUE_DESCRIPTION] "On",1
+[START_SIGNALS] MDU_General_Failure_LED,1,2,1,B,1,0,0,0,1,,,DASH
+[VALUE_DESCRIPTION] "Off",0
+[VALUE_DESCRIPTION] "On",1
+[START_SIGNALS] MDU_Failure,1,2,2,B,1,0,0,0,1,,,VCU
+[VALUE_DESCRIPTION] "Normal",0
+[VALUE_DESCRIPTION] "Failure",1
+[START_SIGNALS] MDU_Overspeed_Warning,1,2,3,B,1,0,0,0,1,,,DASH
+[VALUE_DESCRIPTION] "No Warning",0
+[VALUE_DESCRIPTION] "Warning",1
+[START_SIGNALS] MDU_Warning,1,2,4,B,1,0,0,0,1,,,VCU
+[VALUE_DESCRIPTION] "No Warning",0
+[VALUE_DESCRIPTION] "Warning",1
+[START_SIGNALS] MDU_Temp_Warning,1,2,5,B,1,0,0,0,1,,,DASH,VCU
+[VALUE_DESCRIPTION] "No Warning",0
+[VALUE_DESCRIPTION] "Warning",1
+[START_SIGNALS] MDU_Engine_Temp_Warning,1,2,6,B,1,0,0,0,1,,,DASH,VCU
+[VALUE_DESCRIPTION] "No Warning",0
+[VALUE_DESCRIPTION] "Warning",1
+[START_SIGNALS] MDU_Engine_Temp,9,2,7,I,254,-256,0,98,0.5,°C,,BMS,VCU
+[END_MSG]
+
+[START_MSG] VCU_Engine_Torque_EPP,265,8,6,0,S,VCU
+[START_SIGNALS] VCU_CRC_109,5,8,0,U,31,0,0,0,1,,,MDU
+[START_SIGNALS] VCU_Alive_Counter_109,3,8,5,U,6,0,0,0,1,,,MDU
+[START_SIGNALS] VCU_Eng_Req_Torque_Valid,1,3,4,B,1,0,0,0,1,,,MDU
+[VALUE_DESCRIPTION] "Normal",0
+[VALUE_DESCRIPTION] "Failure",1
+[START_SIGNALS] VCU_Engine_Direction_Req,2,3,5,U,3,0,0,0,1,,,MDU
+[VALUE_DESCRIPTION] "None",0
+[VALUE_DESCRIPTION] "Clockwise",1
+[VALUE_DESCRIPTION] "Counter Clockwise",2
+[VALUE_DESCRIPTION] "Reserved",3
+[START_SIGNALS] VCU_MDU_Interlock,1,3,7,B,1,0,0,0,1,,,MDU
+[VALUE_DESCRIPTION] "Not Active",0
+[VALUE_DESCRIPTION] "Active",1
+[START_SIGNALS] VCU_Eng_Req_Torque,16,2,0,I,20000,-20000,0,0,0.05,Nm,,MDU
+[END_MSG]
+
+[START_MSG] VCU_EPP_Data,287,8,6,0,S,VCU
+[START_SIGNALS] VCU_CRC_11F,5,8,0,U,31,0,0,0,1,,,DASH
+[START_SIGNALS] VCU_Alive_Counter_11F,3,8,5,U,6,0,0,0,1,,,DASH
+[START_SIGNALS] VCU_TC_Status_Response,1,7,7,B,1,0,0,0,1,,,
+[VALUE_DESCRIPTION] "On",0
+[VALUE_DESCRIPTION] "Off",1
+[START_SIGNALS] VCU_Drive_Mode_Status,2,4,2,U,3,0,0,0,1,,,MDU,DASH
+[VALUE_DESCRIPTION] "Normal Mode",0
+[VALUE_DESCRIPTION] "Limp Home Mode",1
+[VALUE_DESCRIPTION] "Turtle Mode",2
+[VALUE_DESCRIPTION] "Reverse Mode",3
+[START_SIGNALS] VCU_Vehicle_State,4,4,4,U,15,0,0,0,1,,,DASH
+[VALUE_DESCRIPTION] "Off",0
+[VALUE_DESCRIPTION] "Init",1
+[VALUE_DESCRIPTION] "Standby",2
+[VALUE_DESCRIPTION] "Drive Active",3
+[VALUE_DESCRIPTION] "Failure",4
+[VALUE_DESCRIPTION] "Charging",5
+[VALUE_DESCRIPTION] "Turn Off",6
+[VALUE_DESCRIPTION] "Reserved",7
+[VALUE_DESCRIPTION] "Reserved",8
+[VALUE_DESCRIPTION] "Reserved",9
+[VALUE_DESCRIPTION] "Reserved",10
+[VALUE_DESCRIPTION] "Reserved",11
+[VALUE_DESCRIPTION] "Reserved",12
+[VALUE_DESCRIPTION] "Reserved",13
+[VALUE_DESCRIPTION] "Reserved",14
+[VALUE_DESCRIPTION] "Reserved",15
+[START_SIGNALS] VCU_Regen_Mode_Response,3,3,0,U,7,0,0,0,1,,,DASH
+[VALUE_DESCRIPTION] "Mode 0",0
+[VALUE_DESCRIPTION] "Mode 1",1
+[VALUE_DESCRIPTION] "Mode 2",2
+[VALUE_DESCRIPTION] "Mode 3",3
+[VALUE_DESCRIPTION] "Mode 4",4
+[VALUE_DESCRIPTION] "Mode 5",5
+[VALUE_DESCRIPTION] "Mode 6",6
+[VALUE_DESCRIPTION] "Mode 7",7
+[END_MSG]
+
+[START_MSG] VCU_Vehicle_Info,1408,8,4,0,S,VCU
+[START_SIGNALS] VCU_Est_Riding_Time,8,5,0,U,255,0,0,0,1,min,,DASH
+[START_SIGNALS] VCU_Drivecycle_Detected,1,4,7,B,1,0,0,0,1,,,BMS,MDU
+[VALUE_DESCRIPTION] "No Drivecycle detected",0
+[VALUE_DESCRIPTION] "Drivecycle detected",1
+[START_SIGNALS] VCU_Est_Range,8,3,0,U,255,0,0,0,5,km,,
+[START_SIGNALS] VCU_Hourmeter,16,2,0,U,65350,0,0,0,0.1,h,,DASH
+[END_MSG]
+
+[START_VALUE_TABLE]
+[START_TABLE] ECU_VIN_MultiplexorGroup
+[VALUE_DESCRIPTION] "ECU_VIN_Multiplexor_1",1
+[VALUE_DESCRIPTION] "ECU_VIN_Multiplexor_0",0
+[END_TABLE]
+[END_VALUE_TABLE]
+
+[NODE] TB,DASH,VCU,BMS,MDU
+
+[START_DESC]
+[START_DESC_NET]
+[END_DESC_NET]
+
+[START_DESC_NODE]
+[END_DESC_NODE]
+
+[START_DESC_MSG]
+[END_DESC_MSG]
+
+[START_DESC_SIG]
+338 S DASH_CRC_152 "CRC of signal 152";
+338 S DASH_Alive_Counter_152 "Alive counter for signal 152";
+338 S BMS_Regeneration_Allowed "Flag indicates if regeneration is allowed according to BAT_T201_BMS_SW_REQUIREMENT_SPECIFICATION";
+338 S BMS_Status_FET "Actual power contactor state.";
+338 S BMS_Voltage_Pack "Measurement BMS pack voltage (sum of cell voltages)";
+338 S BMS_Current_Pack "Measurement of battery pack current";
+1370 S DASH_Odo_Meter_Extended "Dash sends odometer value extended";
+1844 S MDU_Received_Torq_Req "Received torque demand";
+1844 S MDU_Phase_B_volt "Imposed Phase B Voltage";
+1844 S MDU_Phase_A_volt "Imposed Phase A Voltage";
+1844 S MDU_Limited_Torq_Req "Limited torque demand";
+1845 S MDU_Phase_C_volt "Imposed Phase C Voltage";
+1845 S MDU_Phase_C_amps "Motor Current, Phase B ";
+1845 S MDU_Phase_B_amps "Motor Current, Phase B ";
+1845 S MDU_Phase_A_amps "Motor Current, Phase A ";
+1846 S MDU_Iq_request "Requested quadrature Current";
+1846 S MDU_Iq_measured "Measured quadrature Current";
+1846 S MDU_DC_Bus_amps_calc "DC-Bus Current, calculated";
+1846 S MDU_DC_Bus_volt "DC-Bus Voltage";
+1846 S MDU_gate_ready "Gate Driver Ready";
+1847 S MDU_uq_request "Requested quadrature Voltage Uq";
+1847 S MDU_uq_measured "Measured quadrature Voltage Uq";
+1847 S MDU_Id_request "Requested DC-Current";
+1847 S MDU_Id_measured "Measured DC-Current";
+1848 S MDU_ud_request "Requested DC Voltage Ud";
+1848 S MDU_ud_measured "Measured DC-Voltage Ud";
+1848 S MDU_u_mod "Voltage Module";
+1848 S MDU_power_calc "Calculated electrical Inverter Power Output";
+1848 S MDU_gate_fault "Gate Driver Fault";
+282 S MDU_CRC_11A "CRC-5 Checksum";
+282 S MDU_Alive_Counter_11A "Counter is increased every message until overflow";
+282 S MDU_Eng_Actual_Torque "Current engine torque";
+282 S MDU_Engine_Rpm_Validity "Validity of the \"MDU_Engine_Rpm\" signals";
+282 S MDU_Eng_Act_Trq_Validity "Validity of the \"MDU_Eng_Actual_Torque\" signals";
+282 S MDU_Eng_Act_RPM_Gradient "The gradient and therefore the derivative of the RPM signal";
+282 S MDU_Engine_Rpm "Speed of the engine";
+283 S MDU_Min_Torque_Derating "Minimum Torque wich can be generated by the Engine at the current speed, considering derating effects of MDU/Engine (Regeneration)";
+283 S MDU_Max_Torque_Derating "Maximum Torque wich can be generated by the Engine at the current speed, considering derating effects of MDU/Engine (Acceleration)";
+283 S MDU_Min_Torque_Avl "Minimum Torque wich can be generated by the Engine at the current speed. (Regeneration)";
+283 S MDU_Max_Torque_Avl "Maximum Torque wich can be generated by the Engine at the current speed. (Acceleration)";
+608 S MDU_CRC_260 "CRC-5 Checksum";
+608 S MDU_Alive_Counter_260 "Counter is increased every message until overflow";
+608 S MDU_Engine_Direction_Resp "Respond from MDU regarding rotor torque direction.";
+608 S MDU_State "Indicates the actual state of the MDU";
+608 S MDU_Temp "Actual Temperature of the MDU";
+608 S MDU_Malfunction_Indica_LED "Status of the MIL lamp ";
+608 S MDU_General_Failure_LED "Activation signal for general failure LED";
+608 S MDU_Failure "Indicates MDU failure";
+608 S MDU_Overspeed_Warning "Indicates Engine Overspeed";
+608 S MDU_Warning "Indicates MDU warning request for Limp Home Mode";
+608 S MDU_Temp_Warning "Indicates MDU Temperature Warning";
+608 S MDU_Engine_Temp_Warning "Indicates Engine Temperature Warning";
+608 S MDU_Engine_Temp "Actual Temperature of the Engine";
+265 S VCU_CRC_109 "CRC-5 Checksum";
+265 S VCU_Alive_Counter_109 "Counter is increased every message until overflow";
+265 S VCU_Eng_Req_Torque_Valid "Validity bit of \"VCU_Eng_Req_Torque\" signal";
+265 S VCU_Engine_Direction_Req "Request from VCU regarding rotor torque direction.";
+265 S VCU_MDU_Interlock "VCU Request for MDU state \"Drive\"";
+265 S VCU_Eng_Req_Torque "Torque Request from VCU. This Torque shall be applied on the engine.";
+287 S VCU_CRC_11F "CRC-5 Checksum for message 11F";
+287 S VCU_Alive_Counter_11F "Alive Counter of message 11F";
+287 S VCU_TC_Status_Response "The Signal indicates the Traction Control status.";
+287 S VCU_Drive_Mode_Status "Indicates the drive mode status of the vehicle.";
+287 S VCU_Vehicle_State "The Signal indicates the actual Vehicle State.";
+287 S VCU_Regen_Mode_Response "VCU sends Regen Mode response based on DASH request.";
+1408 S VCU_Est_Riding_Time "Estimated remaining riding time of the vehicle";
+1408 S VCU_Drivecycle_Detected "The Signal indicates that a Drivecycle of the Vehicle was detected";
+1408 S VCU_Est_Range "Estimated remaining range of the vehicle";
+1408 S VCU_Hourmeter "Indicates the \"Active Time\" of the vehicle";
+[END_DESC_SIG]
+[END_DESC]
+
+[START_PARAM]
+[START_PARAM_NET]
+"GenNWMSleepTime",INT,0,0,1000000
+"BusType",STRING,"CAN"
+[END_PARAM_NET]
+
+[START_PARAM_NODE]
+"GenNodSleepTime",INT,0,0,1000000
+"NmNode",ENUM,"No","No","Yes"
+"ILUsed",ENUM,"Yes","No","Yes"
+"NodeLayerModules",STRING,"CANoeILNLVector.DLL"
+"NmStationAddress",HEX,0,0,99
+[END_PARAM_NODE]
+
+[START_PARAM_MSG]
+"NmMessage",ENUM,"No","No","Yes"
+"GenMsgCycleTimeFast",INT,0,0,50000
+"GenMsgDelayTime",INT,0,0,1000
+"GenMsgNrOfRepetition",INT,0,0,999999
+"GenMsgFastOnStart",INT,0,0,100000
+"GenMsgILSupport",ENUM,"Yes","No","Yes"
+"GenMsgStartDelayTime",INT,0,0,100000
+"GenMsgSendType",ENUM,"Cyclic","Cyclic","NotUsed","NotUsed","NotUsed","NotUsed","NotUsed","NotUsed","IfActive","NoMsgSendType","NotUsed"
+"GenMsgCycleTime",INT,0,0,50000
+[END_PARAM_MSG]
+
+[START_PARAM_SIG]
+"GenSigStartValue",FLOAT,1.17549e-038,1.17549e-038,1e+011
+"GenSigSendType",ENUM,"Cyclic","Cyclic","OnWrite","OnWriteWithRepetition","OnChange","OnChangeWithRepetition","IfActive","IfActiveWithRepetition","NoSigSendType","OnChangeAndIfActive","OnChangeAndIfActiveWithRepetition"
+"GenSigInactiveValue",INT,0,0,100000
+[END_PARAM_SIG]
+
+[START_PARAM_NODE_RX_SIG]
+[END_PARAM_NODE_RX_SIG]
+
+[START_PARAM_NODE_TX_MSG]
+[END_PARAM_NODE_TX_MSG]
+[END_PARAM]
+
+[START_PARAM_VAL]
+[START_PARAM_NET_VAL]
+[END_PARAM_NET_VAL]
+
+[START_PARAM_NODE_VAL]
+[END_PARAM_NODE_VAL]
+
+[START_PARAM_MSG_VAL]
+338,S,"GenMsgCycleTimeFast",0
+1370,S,"GenMsgCycleTimeFast",0
+1844,S,"GenMsgCycleTimeFast",0
+1845,S,"GenMsgCycleTimeFast",0
+1846,S,"GenMsgCycleTimeFast",0
+1847,S,"GenMsgCycleTimeFast",0
+1848,S,"GenMsgCycleTimeFast",0
+282,S,"GenMsgCycleTimeFast",0
+283,S,"GenMsgCycleTimeFast",0
+608,S,"GenMsgCycleTimeFast",0
+265,S,"GenMsgCycleTimeFast",0
+287,S,"GenMsgCycleTimeFast",0
+1408,S,"GenMsgCycleTimeFast",0
+338,S,"GenMsgSendType","0"
+1370,S,"GenMsgSendType","0"
+1844,S,"GenMsgSendType","0"
+1845,S,"GenMsgSendType","0"
+1846,S,"GenMsgSendType","0"
+1847,S,"GenMsgSendType","0"
+1848,S,"GenMsgSendType","0"
+282,S,"GenMsgSendType","0"
+283,S,"GenMsgSendType","0"
+608,S,"GenMsgSendType","0"
+265,S,"GenMsgSendType","0"
+287,S,"GenMsgSendType","0"
+1408,S,"GenMsgSendType","0"
+338,S,"GenMsgCycleTime",100
+1370,S,"GenMsgCycleTime",1000
+1844,S,"GenMsgCycleTime",10
+1845,S,"GenMsgCycleTime",10
+1846,S,"GenMsgCycleTime",10
+1847,S,"GenMsgCycleTime",10
+1848,S,"GenMsgCycleTime",10
+282,S,"GenMsgCycleTime",10
+283,S,"GenMsgCycleTime",20
+608,S,"GenMsgCycleTime",100
+265,S,"GenMsgCycleTime",10
+287,S,"GenMsgCycleTime",20
+1408,S,"GenMsgCycleTime",500
+[END_PARAM_MSG_VAL]
+
+[START_PARAM_SIG_VAL]
+338,S,DASH_CRC_152,"GenSigStartValue",0
+338,S,DASH_Alive_Counter_152,"GenSigStartValue",0
+338,S,BMS_Regeneration_Allowed,"GenSigStartValue",0
+338,S,BMS_Status_FET,"GenSigStartValue",0
+338,S,BMS_Voltage_Pack,"GenSigStartValue",0
+338,S,BMS_Current_Pack,"GenSigStartValue",0
+1370,S,DASH_Odo_Meter_Extended,"GenSigStartValue",0
+1844,S,MDU_Received_Torq_Req,"GenSigStartValue",0
+1844,S,MDU_Phase_B_volt,"GenSigStartValue",0
+1844,S,MDU_Phase_A_volt,"GenSigStartValue",0
+1844,S,MDU_Limited_Torq_Req,"GenSigStartValue",0
+1845,S,MDU_Phase_C_volt,"GenSigStartValue",0
+1845,S,MDU_Phase_C_amps,"GenSigStartValue",0
+1845,S,MDU_Phase_B_amps,"GenSigStartValue",0
+1845,S,MDU_Phase_A_amps,"GenSigStartValue",0
+1846,S,MDU_Iq_request,"GenSigStartValue",0
+1846,S,MDU_Iq_measured,"GenSigStartValue",0
+1846,S,MDU_DC_Bus_amps_calc,"GenSigStartValue",0
+1846,S,MDU_DC_Bus_volt,"GenSigStartValue",0
+1846,S,MDU_gate_ready,"GenSigStartValue",0
+1847,S,MDU_uq_request,"GenSigStartValue",0
+1847,S,MDU_uq_measured,"GenSigStartValue",0
+1847,S,MDU_Id_request,"GenSigStartValue",0
+1847,S,MDU_Id_measured,"GenSigStartValue",0
+1848,S,MDU_ud_request,"GenSigStartValue",0
+1848,S,MDU_ud_measured,"GenSigStartValue",0
+1848,S,MDU_u_mod,"GenSigStartValue",0
+1848,S,MDU_power_calc,"GenSigStartValue",0
+1848,S,MDU_gate_fault,"GenSigStartValue",0
+282,S,MDU_CRC_11A,"GenSigStartValue",0
+282,S,MDU_Alive_Counter_11A,"GenSigStartValue",0
+282,S,MDU_Eng_Actual_Torque,"GenSigStartValue",0
+282,S,MDU_Engine_Rpm_Validity,"GenSigStartValue",0
+282,S,MDU_Eng_Act_Trq_Validity,"GenSigStartValue",0
+282,S,MDU_Eng_Act_RPM_Gradient,"GenSigStartValue",0
+282,S,MDU_Engine_Rpm,"GenSigStartValue",0
+283,S,MDU_Min_Torque_Derating,"GenSigStartValue",0
+283,S,MDU_Max_Torque_Derating,"GenSigStartValue",0
+283,S,MDU_Min_Torque_Avl,"GenSigStartValue",0
+283,S,MDU_Max_Torque_Avl,"GenSigStartValue",0
+608,S,MDU_CRC_260,"GenSigStartValue",0
+608,S,MDU_Alive_Counter_260,"GenSigStartValue",0
+608,S,MDU_Engine_Direction_Resp,"GenSigStartValue",0
+608,S,MDU_State,"GenSigStartValue",0
+608,S,MDU_Temp,"GenSigStartValue",-68
+608,S,MDU_Malfunction_Indica_LED,"GenSigStartValue",0
+608,S,MDU_General_Failure_LED,"GenSigStartValue",0
+608,S,MDU_Failure,"GenSigStartValue",0
+608,S,MDU_Overspeed_Warning,"GenSigStartValue",0
+608,S,MDU_Warning,"GenSigStartValue",0
+608,S,MDU_Temp_Warning,"GenSigStartValue",0
+608,S,MDU_Engine_Temp_Warning,"GenSigStartValue",0
+608,S,MDU_Engine_Temp,"GenSigStartValue",-196
+265,S,VCU_CRC_109,"GenSigStartValue",0
+265,S,VCU_Alive_Counter_109,"GenSigStartValue",0
+265,S,VCU_Eng_Req_Torque_Valid,"GenSigStartValue",0
+265,S,VCU_Engine_Direction_Req,"GenSigStartValue",0
+265,S,VCU_MDU_Interlock,"GenSigStartValue",0
+265,S,VCU_Eng_Req_Torque,"GenSigStartValue",0
+287,S,VCU_CRC_11F,"GenSigStartValue",0
+287,S,VCU_Alive_Counter_11F,"GenSigStartValue",0
+287,S,VCU_TC_Status_Response,"GenSigStartValue",0
+287,S,VCU_Drive_Mode_Status,"GenSigStartValue",0
+287,S,VCU_Vehicle_State,"GenSigStartValue",0
+287,S,VCU_Regen_Mode_Response,"GenSigStartValue",0
+1408,S,VCU_Est_Riding_Time,"GenSigStartValue",0
+1408,S,VCU_Drivecycle_Detected,"GenSigStartValue",0
+1408,S,VCU_Est_Range,"GenSigStartValue",0
+1408,S,VCU_Hourmeter,"GenSigStartValue",0
+338,S,DASH_CRC_152,"GenSigSendType","0"
+338,S,DASH_Alive_Counter_152,"GenSigSendType","0"
+338,S,BMS_Regeneration_Allowed,"GenSigSendType","0"
+338,S,BMS_Status_FET,"GenSigSendType","0"
+338,S,BMS_Voltage_Pack,"GenSigSendType","0"
+338,S,BMS_Current_Pack,"GenSigSendType","0"
+1370,S,DASH_Odo_Meter_Extended,"GenSigSendType","0"
+1844,S,MDU_Received_Torq_Req,"GenSigSendType","0"
+1844,S,MDU_Phase_B_volt,"GenSigSendType","0"
+1844,S,MDU_Phase_A_volt,"GenSigSendType","0"
+1844,S,MDU_Limited_Torq_Req,"GenSigSendType","0"
+1845,S,MDU_Phase_C_volt,"GenSigSendType","0"
+1845,S,MDU_Phase_C_amps,"GenSigSendType","0"
+1845,S,MDU_Phase_B_amps,"GenSigSendType","0"
+1845,S,MDU_Phase_A_amps,"GenSigSendType","0"
+1846,S,MDU_Iq_request,"GenSigSendType","0"
+1846,S,MDU_Iq_measured,"GenSigSendType","0"
+1846,S,MDU_DC_Bus_amps_calc,"GenSigSendType","0"
+1846,S,MDU_DC_Bus_volt,"GenSigSendType","0"
+1846,S,MDU_gate_ready,"GenSigSendType","0"
+1847,S,MDU_uq_request,"GenSigSendType","0"
+1847,S,MDU_uq_measured,"GenSigSendType","0"
+1847,S,MDU_Id_request,"GenSigSendType","0"
+1847,S,MDU_Id_measured,"GenSigSendType","0"
+1848,S,MDU_ud_request,"GenSigSendType","0"
+1848,S,MDU_ud_measured,"GenSigSendType","0"
+1848,S,MDU_u_mod,"GenSigSendType","0"
+1848,S,MDU_power_calc,"GenSigSendType","0"
+1848,S,MDU_gate_fault,"GenSigSendType","0"
+282,S,MDU_CRC_11A,"GenSigSendType","0"
+282,S,MDU_Alive_Counter_11A,"GenSigSendType","0"
+282,S,MDU_Eng_Actual_Torque,"GenSigSendType","0"
+282,S,MDU_Engine_Rpm_Validity,"GenSigSendType","0"
+282,S,MDU_Eng_Act_Trq_Validity,"GenSigSendType","0"
+282,S,MDU_Eng_Act_RPM_Gradient,"GenSigSendType","0"
+282,S,MDU_Engine_Rpm,"GenSigSendType","0"
+283,S,MDU_Min_Torque_Derating,"GenSigSendType","0"
+283,S,MDU_Max_Torque_Derating,"GenSigSendType","0"
+283,S,MDU_Min_Torque_Avl,"GenSigSendType","0"
+283,S,MDU_Max_Torque_Avl,"GenSigSendType","0"
+608,S,MDU_CRC_260,"GenSigSendType","0"
+608,S,MDU_Alive_Counter_260,"GenSigSendType","0"
+608,S,MDU_Engine_Direction_Resp,"GenSigSendType","0"
+608,S,MDU_State,"GenSigSendType","0"
+608,S,MDU_Temp,"GenSigSendType","0"
+608,S,MDU_Malfunction_Indica_LED,"GenSigSendType","0"
+608,S,MDU_General_Failure_LED,"GenSigSendType","0"
+608,S,MDU_Failure,"GenSigSendType","0"
+608,S,MDU_Overspeed_Warning,"GenSigSendType","0"
+608,S,MDU_Warning,"GenSigSendType","0"
+608,S,MDU_Temp_Warning,"GenSigSendType","0"
+608,S,MDU_Engine_Temp_Warning,"GenSigSendType","0"
+608,S,MDU_Engine_Temp,"GenSigSendType","0"
+265,S,VCU_CRC_109,"GenSigSendType","0"
+265,S,VCU_Alive_Counter_109,"GenSigSendType","0"
+265,S,VCU_Eng_Req_Torque_Valid,"GenSigSendType","0"
+265,S,VCU_Engine_Direction_Req,"GenSigSendType","0"
+265,S,VCU_MDU_Interlock,"GenSigSendType","0"
+265,S,VCU_Eng_Req_Torque,"GenSigSendType","0"
+287,S,VCU_CRC_11F,"GenSigSendType","0"
+287,S,VCU_Alive_Counter_11F,"GenSigSendType","0"
+287,S,VCU_TC_Status_Response,"GenSigSendType","0"
+287,S,VCU_Drive_Mode_Status,"GenSigSendType","0"
+287,S,VCU_Vehicle_State,"GenSigSendType","0"
+287,S,VCU_Regen_Mode_Response,"GenSigSendType","0"
+1408,S,VCU_Est_Riding_Time,"GenSigSendType","0"
+1408,S,VCU_Drivecycle_Detected,"GenSigSendType","0"
+1408,S,VCU_Est_Range,"GenSigSendType","0"
+1408,S,VCU_Hourmeter,"GenSigSendType","0"
+[END_PARAM_SIG_VAL]
+
+[END_PARAM_VAL]
+
+
+[START_NOT_SUPPORTED]
+[END_NOT_SUPPORTED]
+
+[START_NOT_PROCESSED]
+	PZ_
+	ON_QRS_
+	ON_
+	INY_
+	PNG_QRS_
+	PNG_
+	SVYGRE
+	ON_QRS_QRS_
+	RI_QNGN_
+	RAIINE_QNGN_
+	FTGLCR_
+	FTGLCR_INY_
+	ON_QRS_FTGLCR_
+	ON_FTGLCR_
+	FVT_GLCR_ERS_
+	INY_GNOYR_
+	FVT_TEBHC_
+	FVT_INYGLCR_
+	FVTGLCR_INYGLCR_
+	OB_GK_OH_
+	ON_QRS_ERY_
+	ON_ERY_
+	ON_QRS_QRS_ERY_
+	OH_FT_ERY_
+	OH_RI_ERY_
+	OH_OB_ERY_
+	FT_ZHY_INY_
+OF_:
+
+[END_NOT_PROCESSED]

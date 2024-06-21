@@ -1,0 +1,167 @@
+{
+	"build": {
+		"path": "./t207_sfoc_nxps32k344canhub/"
+	},
+	"target": {
+		"type": "nxps32k344canhub"
+	},
+	"blocks": [{
+		"id": "scheduler0",
+		"interval": "500"
+	}, {
+		"id": "dio"
+	}, {
+		"id": "adc0"
+	}, {
+		"id": "adc1"
+	}, {
+		"id": "adc2"
+	}, {
+		"id": "cpwma",
+		"high_side_pwm": "6",
+		"low_side_pwm": "5"
+	}, {
+		"id": "cpwmb",
+		"high_side_pwm": "3",
+		"low_side_pwm": "4"
+	}, {
+		"id": "cpwmc",
+		"high_side_pwm": "2",
+		"low_side_pwm": "1"
+	}, {
+		"type": "ads7883",
+		"id": "ads1",
+		"spi": "1",
+		"cs": "0"
+	}, {
+		"type": "ccode",
+		"id": "ads2",
+		"path": "."
+	}, {
+		"type": "ads7883",
+		"id": "ads4",
+		"spi": "4",
+		"cs": "0"
+	}, {
+		"type": "ad799x",
+		"id": "adi1",
+		"i2c": "1"
+	}, {
+		"type": "can",
+		"id": "can3",
+		"database": "./can/MDU_V002x_TB.dbc",
+		"receive": [
+			{"id": "0x152", "name": "BMS_Pack_CV_Info", "timeout": "500"},
+			{"id": "0x109", "name": "VCU_Engine_Torque_EPP", "timeout": "50"},
+			{"id": "0x11f", "name": "VCU_EPP_Data", "timeout": "100"},
+			{"id": "0x7d0", "name": "TB_Request", "timeout": "500"}
+		],
+		"transmit": [
+			{"id": "0x734", "name": "MDU_Debug_1", "period": "10"},
+			{"id": "0x735", "name": "MDU_Debug_2", "period": "10"},
+			{"id": "0x736", "name": "MDU_Debug_3", "period": "10"},
+			{"id": "0x737", "name": "MDU_Debug_4", "period": "10"},
+			{"id": "0x738", "name": "MDU_Debug_5", "period": "10"},
+			{"id": "0x11a", "name": "MDU_Speed_Torque_Info", "period": "10"},
+			{"id": "0x11b", "name": "MDU_Status_Info_1", "period": "20"},
+			{"id": "0x260", "name": "MDU_Status_Info_2", "period": "100"}
+		]
+	}, {
+		"type": "ccode",
+		"id": "asw",
+		"path": "."
+	}, {
+		"type": "diagnostic",
+		"id": "diagnostic0",
+		"interface": {
+			"id": "can3",
+			"protocol": "uds",
+			"request_can_id": "0x7e4",
+			"response_can_id": "0x7ec"
+		},
+		"database": "diagnostic/diagnostic.json",
+		"store_interval": "5000"
+	}],
+	"links": [
+		["scheduler0.interval", "asw.in.interval_us"],
+		["scheduler0.warning", "diagnostic0.Failure.Scheduler", {"increment": true}],
+
+		["dio.in_11", "diagnostic0.GateDriver.PhaseC.LowSide.Fault"],
+		["dio.in_129", "diagnostic0.GateDriver.PhaseC.LowSide.Ready"],
+		["dio.in_154", "diagnostic0.GateDriver.PhaseC.HighSide.Fault"],
+		["dio.in_12", "diagnostic0.GateDriver.PhaseC.HighSide.Ready"],
+		["dio.in_3", "diagnostic0.GateDriver.PhaseB.HighSide.Fault"],
+		["dio.in_2", "diagnostic0.GateDriver.PhaseB.HighSide.Ready"],
+		["dio.in_0", "diagnostic0.GateDriver.PhaseB.LowSide.Fault"],
+		["dio.in_1", "diagnostic0.GateDriver.PhaseB.LowSide.Ready"],
+		["dio.in_50", "diagnostic0.GateDriver.PhaseA.LowSide.Fault"],
+		["dio.in_51", "diagnostic0.GateDriver.PhaseA.LowSide.Ready"],
+		["dio.in_52", "diagnostic0.GateDriver.PhaseA.HighSide.Fault"],
+		["dio.in_53", "diagnostic0.GateDriver.PhaseA.HighSide.Ready"],
+		
+		["adc0.6", "diagnostic0.PositionSensor.SineMinus"],
+		["adc1.2", "diagnostic0.PositionSensor.CosineMinus"],
+		["adc2.3", "asw.in.sine"],
+		["adc2.3", "diagnostic0.PositionSensor.SinePlus"],
+		["adc2.4", "asw.in.cosine"],
+		["adc2.4", "diagnostic0.PositionSensor.CosinePlus"],
+		["adc2.5", "diagnostic0.TemperatureSensor.Motor"],
+
+		["ads1.value", "diagnostic0.PhaseB.Current"],
+		["ads1.value", "asw.in.ib_raw"],
+		["ads1.failure", "diagnostic0.Failure.ADS.1"],
+
+		["ads2.cs0.value", "diagnostic0.DC.Voltage"],
+		["ads2.cs0.failure", "diagnostic0.Failure.ADS.2.0"],
+
+		["ads2.cs1.value", "diagnostic0.PhaseC.Current"],
+		["ads2.cs1.value", "asw.in.ic_raw"],
+		["ads2.cs1.failure", "diagnostic0.Failure.ADS.2.1"],			
+		
+		["ads4.value", "diagnostic0.PhaseA.Current"],
+		["ads4.value", "asw.in.ia_raw"],
+		["ads4.failure", "diagnostic0.Failure.ADS.4"],
+
+		["adi1.1", "diagnostic0.TemperatureSensor.PhaseA"],
+		["adi1.2", "diagnostic0.TemperatureSensor.PhaseB"],
+		["adi1.3", "diagnostic0.TemperatureSensor.PhaseC"],
+		["adi1.failure", "diagnostic0.Failure.ADI", {"increment": true}],
+
+
+
+
+		
+		["can3.0x7d0.TB_Request_Speed:int16", "asw.in.rpm_request"],
+		["can3.0x109.VCU_Eng_Req_Torque:double", "asw.in.torque_request"],
+		["can3.0x109.VCU_Eng_Req_Torque_Valid:uint8", "asw.in.torque_request_valid"],
+		["can3.0x109.VCU_MDU_Interlock:uint8", "asw.in.interlock_request"],
+		
+
+		["diagnostic0.ASW.CommutationType", "asw.in.commutation_type"],
+		["diagnostic0.ASW.Ud", "asw.in.ud"],
+
+
+		["asw.out.duty_cycle_a", "cpwma.value"],
+		["asw.out.duty_cycle_a", "diagnostic0.PhaseA.DutyCycle"],
+		["asw.out.duty_cycle_b", "cpwmb.value"],
+		["asw.out.duty_cycle_b", "diagnostic0.PhaseB.DutyCycle"],
+		["asw.out.duty_cycle_c", "cpwmc.value"],
+		["asw.out.duty_cycle_c", "diagnostic0.PhaseC.DutyCycle"],
+		["asw.out.gate_driver_enable", "dio.out_135"],
+		["asw.out.gate_driver_enable", "diagnostic0.GateDriver.Enable"],
+		["asw.out.open_loop_angle", "diagnostic0.ASW.OpenLoopAngle"],
+		["asw.out.magnetic_angle", "diagnostic0.ASW.MagneticAngle"],
+		["asw.out.measured_angle", "diagnostic0.ASW.MeasuredAngle"],
+		["asw.out.measured_rpm", "can3.0x11a.MDU_Engine_Rpm:int16"],
+		["asw.out.ia", "diagnostic0.ASW.Ia"],
+		["asw.out.ib", "diagnostic0.ASW.Ib"],
+		["asw.out.ic", "diagnostic0.ASW.Ic"],
+		["asw.out.iabc", "diagnostic0.ASW.Iabc"],
+		["asw.out.id_raw", "diagnostic0.ASW.Id.Raw"],
+		["asw.out.iq_raw", "diagnostic0.ASW.Iq.Raw"],
+		["asw.out.id_filtered", "diagnostic0.ASW.Id.Filtered"],
+		["asw.out.iq_filtered", "diagnostic0.ASW.Iq.Filtered"],
+		["asw.out.udout", "diagnostic0.ASW.Udout"],
+		["asw.out.uqout", "diagnostic0.ASW.Uqout"]
+	]
+}

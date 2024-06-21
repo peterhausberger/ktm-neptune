@@ -1,0 +1,410 @@
+[
+  {
+    "name": "Version",
+    "id": "0x4100",
+    "type": "uint32",
+    "nonvolatile": false,
+    "readonly": true,
+    "cType": "uint32_t"
+  },
+  {
+    "name": "GateDriver.PhaseA.HighSide.Ready",
+    "type": "boolean",
+    "readonly": true,
+    "id": "0x4101",
+    "nonvolatile": false,
+    "cType": "uint8_t"
+  },
+  {
+    "name": "GateDriver.PhaseA.HighSide.Fault",
+    "type": "boolean",
+    "readonly": true,
+    "id": "0x4102",
+    "nonvolatile": false,
+    "cType": "uint8_t"
+  },
+  {
+    "name": "GateDriver.PhaseA.LowSide.Ready",
+    "type": "boolean",
+    "readonly": true,
+    "id": "0x4103",
+    "nonvolatile": false,
+    "cType": "uint8_t"
+  },
+  {
+    "name": "GateDriver.PhaseA.LowSide.Fault",
+    "type": "boolean",
+    "readonly": true,
+    "id": "0x4104",
+    "nonvolatile": false,
+    "cType": "uint8_t"
+  },
+  {
+    "name": "GateDriver.PhaseB.HighSide.Ready",
+    "type": "boolean",
+    "readonly": true,
+    "id": "0x4105",
+    "nonvolatile": false,
+    "cType": "uint8_t"
+  },
+  {
+    "name": "GateDriver.PhaseB.HighSide.Fault",
+    "type": "boolean",
+    "readonly": true,
+    "id": "0x4106",
+    "nonvolatile": false,
+    "cType": "uint8_t"
+  },
+  {
+    "name": "GateDriver.PhaseB.LowSide.Ready",
+    "type": "boolean",
+    "readonly": true,
+    "id": "0x4107",
+    "nonvolatile": false,
+    "cType": "uint8_t"
+  },
+  {
+    "name": "GateDriver.PhaseB.LowSide.Fault",
+    "type": "boolean",
+    "readonly": true,
+    "id": "0x4108",
+    "nonvolatile": false,
+    "cType": "uint8_t"
+  },
+  {
+    "name": "GateDriver.PhaseC.HighSide.Ready",
+    "type": "boolean",
+    "readonly": true,
+    "id": "0x4109",
+    "nonvolatile": false,
+    "cType": "uint8_t"
+  },
+  {
+    "name": "GateDriver.PhaseC.HighSide.Fault",
+    "type": "boolean",
+    "readonly": true,
+    "id": "0x410a",
+    "nonvolatile": false,
+    "cType": "uint8_t"
+  },
+  {
+    "name": "GateDriver.PhaseC.LowSide.Ready",
+    "type": "boolean",
+    "readonly": true,
+    "id": "0x410b",
+    "nonvolatile": false,
+    "cType": "uint8_t"
+  },
+  {
+    "name": "GateDriver.PhaseC.LowSide.Fault",
+    "type": "boolean",
+    "readonly": true,
+    "id": "0x410c",
+    "nonvolatile": false,
+    "cType": "uint8_t"
+  },
+  {
+    "name": "PositionSensor.SinePlus",
+    "type": "float",
+    "readonly": true,
+    "id": "0x410d",
+    "nonvolatile": false,
+    "cType": "float"
+  },
+  {
+    "name": "PositionSensor.CosinePlus",
+    "type": "float",
+    "readonly": true,
+    "id": "0x410e",
+    "nonvolatile": false,
+    "cType": "float"
+  },
+  {
+    "name": "PositionSensor.SineMinus",
+    "type": "float",
+    "readonly": true,
+    "id": "0x410f",
+    "nonvolatile": false,
+    "cType": "float"
+  },
+  {
+    "name": "PositionSensor.CosineMinus",
+    "type": "float",
+    "readonly": true,
+    "id": "0x4110",
+    "nonvolatile": false,
+    "cType": "float"
+  },
+  {
+    "name": "TemperatureSensor.Motor",
+    "type": "float",
+    "readonly": true,
+    "id": "0x4111",
+    "nonvolatile": false,
+    "cType": "float"
+  },
+  {
+    "name": "TemperatureSensor.PhaseA",
+    "type": "float",
+    "readonly": true,
+    "id": "0x4112",
+    "nonvolatile": false,
+    "cType": "float"
+  },
+  {
+    "name": "TemperatureSensor.PhaseB",
+    "type": "float",
+    "readonly": true,
+    "id": "0x4113",
+    "nonvolatile": false,
+    "cType": "float"
+  },
+  {
+    "name": "TemperatureSensor.PhaseC",
+    "type": "float",
+    "readonly": true,
+    "id": "0x4114",
+    "nonvolatile": false,
+    "cType": "float"
+  },
+  {
+    "name": "PhaseA.Current",
+    "type": "float",
+    "readonly": true,
+    "id": "0x4115",
+    "nonvolatile": false,
+    "cType": "float"
+  },
+  {
+    "name": "PhaseB.Current",
+    "type": "float",
+    "readonly": true,
+    "id": "0x4116",
+    "nonvolatile": false,
+    "cType": "float"
+  },
+  {
+    "name": "PhaseC.Current",
+    "type": "float",
+    "readonly": true,
+    "id": "0x4117",
+    "nonvolatile": false,
+    "cType": "float"
+  },
+  {
+    "name": "DC.Voltage",
+    "type": "float",
+    "readonly": true,
+    "id": "0x4118",
+    "nonvolatile": false,
+    "cType": "float"
+  },
+  {
+    "name": "PhaseA.DutyCycle",
+    "type": "float",
+    "readonly": true,
+    "id": "0x4119",
+    "nonvolatile": false,
+    "cType": "float"
+  },
+  {
+    "name": "PhaseB.DutyCycle",
+    "type": "float",
+    "readonly": true,
+    "id": "0x411a",
+    "nonvolatile": false,
+    "cType": "float"
+  },
+  {
+    "name": "PhaseC.DutyCycle",
+    "type": "float",
+    "readonly": true,
+    "id": "0x411b",
+    "nonvolatile": false,
+    "cType": "float"
+  },
+  {
+    "name": "GateDriver.Enable",
+    "type": "boolean",
+    "readonly": true,
+    "id": "0x411c",
+    "nonvolatile": false,
+    "cType": "uint8_t"
+  },
+  {
+    "name": "ASW.CommutationType",
+    "type": "uint8",
+    "readonly": false,
+    "id": "0x411d",
+    "nonvolatile": false,
+    "cType": "uint8_t"
+  },
+  {
+    "name": "ASW.Ud",
+    "type": "float",
+    "readonly": false,
+    "id": "0x411e",
+    "nonvolatile": false,
+    "cType": "float"
+  },
+  {
+    "name": "ASW.OpenLoopAngle",
+    "type": "float",
+    "readonly": true,
+    "id": "0x411f",
+    "nonvolatile": false,
+    "cType": "float"
+  },
+  {
+    "name": "ASW.MagneticAngle",
+    "type": "float",
+    "readonly": true,
+    "id": "0x4120",
+    "nonvolatile": false,
+    "cType": "float"
+  },
+  {
+    "name": "ASW.MeasuredAngle",
+    "type": "float",
+    "readonly": true,
+    "id": "0x4121",
+    "nonvolatile": false,
+    "cType": "float"
+  },
+  {
+    "name": "ASW.Ia",
+    "type": "float",
+    "readonly": true,
+    "id": "0x4122",
+    "nonvolatile": false,
+    "cType": "float"
+  },
+  {
+    "name": "ASW.Ib",
+    "type": "float",
+    "readonly": true,
+    "id": "0x4123",
+    "nonvolatile": false,
+    "cType": "float"
+  },
+  {
+    "name": "ASW.Ic",
+    "type": "float",
+    "readonly": true,
+    "id": "0x4124",
+    "nonvolatile": false,
+    "cType": "float"
+  },
+  {
+    "name": "ASW.Iabc",
+    "type": "float",
+    "readonly": true,
+    "id": "0x4125",
+    "nonvolatile": false,
+    "cType": "float"
+  },
+  {
+    "name": "ASW.Id.Raw",
+    "type": "float",
+    "readonly": true,
+    "id": "0x4126",
+    "nonvolatile": false,
+    "cType": "float"
+  },
+  {
+    "name": "ASW.Iq.Raw",
+    "type": "float",
+    "readonly": true,
+    "id": "0x4127",
+    "nonvolatile": false,
+    "cType": "float"
+  },
+  {
+    "name": "ASW.Id.Filtered",
+    "type": "float",
+    "readonly": true,
+    "id": "0x4128",
+    "nonvolatile": false,
+    "cType": "float"
+  },
+  {
+    "name": "ASW.Iq.Filtered",
+    "type": "float",
+    "readonly": true,
+    "id": "0x4129",
+    "nonvolatile": false,
+    "cType": "float"
+  },
+  {
+    "name": "ASW.Udout",
+    "type": "float",
+    "readonly": true,
+    "id": "0x412a",
+    "nonvolatile": false,
+    "cType": "float"
+  },
+  {
+    "name": "ASW.Uqout",
+    "type": "float",
+    "readonly": true,
+    "id": "0x412b",
+    "nonvolatile": false,
+    "cType": "float"
+  },
+  {
+    "name": "Failure.Scheduler",
+    "type": "uint32",
+    "readonly": true,
+    "id": "0x412c",
+    "nonvolatile": false,
+    "cType": "uint32_t"
+  },
+  {
+    "name": "Failure.ADS.1",
+    "type": "uint32",
+    "readonly": true,
+    "id": "0x412d",
+    "nonvolatile": false,
+    "cType": "uint32_t"
+  },
+  {
+    "name": "Failure.ADS.2.0",
+    "type": "uint32",
+    "readonly": true,
+    "id": "0x412e",
+    "nonvolatile": false,
+    "cType": "uint32_t"
+  },
+  {
+    "name": "Failure.ADS.2.1",
+    "type": "uint32",
+    "readonly": true,
+    "id": "0x412f",
+    "nonvolatile": false,
+    "cType": "uint32_t"
+  },
+  {
+    "name": "Failure.ADS.4",
+    "type": "uint32",
+    "readonly": true,
+    "id": "0x4130",
+    "nonvolatile": false,
+    "cType": "uint32_t"
+  },
+  {
+    "name": "Failure.ADI",
+    "type": "uint32",
+    "readonly": true,
+    "id": "0x4131",
+    "nonvolatile": false,
+    "cType": "uint32_t"
+  },
+  {
+    "name": "Failure.NVM",
+    "type": "uint32",
+    "readonly": true,
+    "id": "0x4132",
+    "nonvolatile": false,
+    "cType": "uint32_t"
+  }
+]
