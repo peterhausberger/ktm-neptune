@@ -6,7 +6,6 @@
 #include "../middleware/middleware.h" // @todo Remove!
 #include "../drivers/dio.h"
 #include "../drivers/pwm.h"
-#include "Emios_Mcl_Ip.h"
 
 uint32_t tasks_pwm_counter;
 
@@ -82,10 +81,10 @@ void vTaskCode( void * pvParameters )
 	{
         //taskENTER_CRITICAL();
 
-        if (cycle == 0) Emios_Mcl_Ip_Init(0, &Emios_Mcl_Ip_0_Config_BOARD_INITPERIPHERALS);
+        if (cycle == 0) pwm_start();
         ++cycle;
 
-        tasks_pwm_counter = IP_EMIOS_0->CH.UC[23].CNT;
+        tasks_pwm_counter = pwm_get_counter();
 
         // Perform action here.
         dio_write(&dio_out_44, 1);

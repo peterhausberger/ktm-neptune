@@ -21,6 +21,9 @@ extern const pwm_instance_t pwm_instance_6;
 
 int32_t pwm_init(const pwm_instance_t* instance);
 int32_t pwm_deinit(const pwm_instance_t* instance);
+
 int32_t pwm_set_duty_cycle(const pwm_instance_t* instance, float duty_cycle);
+int32_t pwm_start(void);
+uint32_t pwm_get_counter(void);
 
 #endif

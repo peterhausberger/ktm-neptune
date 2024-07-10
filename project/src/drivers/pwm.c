@@ -73,3 +73,13 @@ int32_t pwm_set_duty_cycle(const pwm_instance_t* instance, float value) {
 
     return 0;
 }
+
+int32_t pwm_start(void) {
+	/* Initialize Emios_Mcl driver */
+	Emios_Mcl_Ip_Init(_INSTANCE_0, &Emios_Mcl_Ip_0_Config_BOARD_INITPERIPHERALS);
+	return 0;
+}
+
+uint32_t pwm_get_counter(void) {
+	return IP_EMIOS_0->CH.UC[23].CNT;
+}
