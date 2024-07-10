@@ -1,0 +1,11 @@
+#ifndef I2C_H
+#define I2C_H
+
+typedef sint32 int32; // @todo Move to general header!
+
+int32 i2c_init(void);
+int32 i2c_deinit(void);
+
+int32 i2c_transceive(void);
+
+#endif

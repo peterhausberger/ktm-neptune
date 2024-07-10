@@ -1,0 +1,121 @@
+#include "Lpi2c_Ip.h"
+
+#include "i2c.h"
+
+/**
+* @brief        Define transfer size
+*/
+#define TRANSFER_SIZE 8U
+
+uint8 rxBufferSlave[TRANSFER_SIZE] = {0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0};
+uint8 txBufferSlave[TRANSFER_SIZE] = {0x40, 0x41, 0x42, 0x43, 0x44, 0x45, 0x46, 0x47};
+uint8 rxBufferMaster[TRANSFER_SIZE] = {0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0};
+uint8 txBufferMaster[TRANSFER_SIZE] = {0x0, 0x1, 0x2, 0x3, 0x4, 0x5, 0x6, 0x7};
+
+
+void i2c_slave_callback(Lpi2c_Ip_SlaveEventType event, uint8 user_data) {
+	uint32 instance = (uint32) user_data;
+
+	switch(event) {
+	   case I2C_SLAVE_EVENT_TX_REQ:
+		   Lpi2c_Ip_SlaveSetBuffer(instance, txBufferSlave, TRANSFER_SIZE);
+		   break;
+	   case I2C_SLAVE_EVENT_RX_REQ:
+			Lpi2c_Ip_SlaveSetBuffer(instance, rxBufferSlave, TRANSFER_SIZE);
+	        break;
+	   default:
+		   break;
+	}
+}
+
+void i2c_master_callback(Lpi2c_Ip_MasterEventType event, uint8 user_data) {
+//	uint32 u32Instance = (uint32)userData;
+//
+//	switch(event)
+//	{
+//	   case I2C_SLAVE_EVENT_TX_REQ:
+//		   Lpi2c_Ip_SlaveSetBuffer(u32Instance, txBuffer, TRANSFER_SIZE);
+//		   break;
+//
+//	   case I2C_SLAVE_EVENT_RX_REQ:
+//			Lpi2c_Ip_SlaveSetBuffer(u32Instance, rxBufferSlave, TRANSFER_SIZE);
+//	        break;
+//
+//	   default:
+//		   break;
+//	}
+//
+	/* Cast to void to avoid compiler warnings */
+ 	(void) user_data;
+}
+
+/**
+WARNING: Must be called after DIO init!!!
+*/
+int32 i2c_init(void) {
+	Lpi2c_Ip_SlaveInit(LPI2C_CHANNEL_0, &I2c_Lpi2cSlaveChannel0);
+
+	/* Init lpi2c in master mod */
+	Lpi2c_Ip_MasterInit(LPI2C_CHANNEL_1, &I2c_Lpi2cMasterChannel1);
+}
+
+int32 i2c_deinit(void) {
+	Lpi2c_Ip_SlaveDeinit(LPI2C_CHANNEL_0);
+
+	Lpi2c_Ip_MasterDeinit(LPI2C_CHANNEL_1);
+}
+
+
+int32 i2c_transceive(void) {
+	int32 result = 0;
+
+	/* Send data non-blocking */
+	Lpi2c_Ip_MasterSendData(LPI2C_CHANNEL_1, txBufferMaster, TRANSFER_SIZE, TRUE);
+
+	/* Wait master transfer to finish */
+	uint32 timeout = 0xFFFF;
+	while (((Lpi2c_Ip_MasterGetTransferStatus(LPI2C_CHANNEL_1, NULL_PTR)) == LPI2C_IP_BUSY_STATUS) && (timeout > 0)) {
+		timeout--;
+	}
+	if (timeout == 0) result |= 0x01;
+	if (Lpi2c_Ip_MasterGetTransferStatus(LPI2C_CHANNEL_1, NULL_PTR) != LPI2C_IP_SUCCESS_STATUS) result |= 0x02;
+
+	/* Wait slave module to finish */
+	timeout = 0xFFFF;
+	while (((Lpi2c_Ip_SlaveGetTransferStatus(LPI2C_CHANNEL_0, NULL_PTR)) == LPI2C_IP_BUSY_STATUS) && (timeout > 0)) {
+		timeout--;
+	}
+	if (timeout == 0) result |= 0x04;
+	if (Lpi2c_Ip_SlaveGetTransferStatus(LPI2C_CHANNEL_0, NULL_PTR) != LPI2C_IP_SUCCESS_STATUS) result |= 0x08;
+
+	/* Verify data received */
+	uint8 i;
+	for (i = 0; i < TRANSFER_SIZE; i++) {
+		if (txBufferMaster[i] != rxBufferSlave[i]) {
+			result |= 0x10;
+		}
+	}
+
+	/* Receive data non-blocking */
+	Lpi2c_Ip_MasterReceiveData(LPI2C_CHANNEL_1, rxBufferMaster, TRANSFER_SIZE, TRUE);
+
+	/* Wait master transfer to finish */
+	timeout = 0xFFFF;
+	while (((Lpi2c_Ip_MasterGetTransferStatus(LPI2C_CHANNEL_1, NULL_PTR)) == LPI2C_IP_BUSY_STATUS) && (timeout > 0)) {
+		timeout--;
+	}
+
+	/* Wait slave module to finish */
+	while (((Lpi2c_Ip_SlaveGetTransferStatus(LPI2C_CHANNEL_0, NULL_PTR)) == LPI2C_IP_BUSY_STATUS) && (timeout > 0)) {
+		timeout--;
+	}
+
+	/* Verify data received */
+	for (i = 0; i < TRANSFER_SIZE; i++) {
+		if (rxBufferMaster[i] != txBufferSlave[i]) {
+			result |= 0x1000;
+		}
+	}
+
+	return result;
+}

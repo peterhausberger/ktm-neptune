@@ -1,0 +1,36 @@
+/*
+ *
+ */
+
+#include "Std_Types.h"
+
+#include "Emios_Mcl_Ip.h"
+
+//#include "KIN1.h"
+
+#include "timer.h"
+
+static uint64_t _cyccnt_upper_48bit;
+static uint16_t _prev_cyccnt;
+
+static uint64_t _timer_get(void) {
+    uint16_t cyccnt = IP_EMIOS_0->CH.UC[22].CNT;
+	if (cyccnt < _prev_cyccnt) _cyccnt_upper_48bit += 65535;
+	_prev_cyccnt = cyccnt;
+
+	return (_cyccnt_upper_48bit + cyccnt);
+}
+
+void timer_init(void) {
+    _cyccnt_upper_48bit = 0;
+    _prev_cyccnt = 0;
+}
+
+/*
+ * @return The current timer in us.
+ * @note It is important that the timer is called regularly (at least once every 26 s for 160 MHz).
+ */
+uint64_t timer_get(void) {
+	return (_timer_get() / 10);
+}
+
