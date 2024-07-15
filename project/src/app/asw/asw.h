@@ -434,6 +434,13 @@ static void _step_gate_driver(void) {
 		//float u_b = uq * (-sinf(angle_rad - 2.0 * PI / 3.0) * 0.5 + 0.5);
 		//float u_c = uq * (-sinf(angle_rad - 4.0 * PI / 3.0) * 0.5 + 0.5);
 
+		float amplitude = sqrtf(ud * ud + uq * uq);
+		if (amplitude > 0.5f) {
+			ud = ud / (amplitude / 0.5f);
+			uq = uq / (amplitude / 0.5f);
+			amplitude = 0.5f;
+		}
+
 		asw.out.udout = ud;
 		asw.out.uqout = uq;
 
@@ -452,15 +459,15 @@ static void _step_gate_driver(void) {
 	      float u_b = -0.5f * Ualpha + _SQRT3_2 * Ubeta;
 	      float u_c = -0.5f * Ualpha - _SQRT3_2 * Ubeta;
 
-	      float min = u_a;
-	      if (u_b < min) min = u_b;
-	      if (u_c < min) min = u_c;
+	      //float min = u_a;
+	      //if (u_b < min) min = u_b;
+	      //if (u_c < min) min = u_c;
 	      //u_a = u_a + 0.5;
 	      //u_b = u_b + 0.5;
 	      //u_c = u_c + 0.5;
-	      u_a = u_a - min;
-	      u_b = u_b - min;
-	      u_c = u_c - min;
+	      u_a = u_a + amplitude;
+	      u_b = u_b + amplitude;
+	      u_c = u_c + amplitude;
 
 		asw.out.duty_cycle_a = u_a;
 		asw.out.duty_cycle_b = u_b;
